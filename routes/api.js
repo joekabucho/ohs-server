@@ -7,6 +7,7 @@ var Jobcard = require('../models/jobcard');
 var Induction_checklist = require('../models/induction_checklist');
 var Image_upload = require('../models/image_upload');
 var Toolbox_talk = require('../models/toolbox_talk');
+var Work_permit = require('../models/work_permit');
 
 
 // Routes
@@ -21,6 +22,9 @@ Image_upload.register(router, '/image_upload');
 
 Toolbox_talk.methods(['get', 'put', 'post', 'delete']);
 Toolbox_talk.register(router, '/toolbox_talk');
+
+Work_permit.methods(['get', 'put', 'post', 'delete']);
+Work_permit.register(router, '/work_permit');
 
 // Return router
 module.exports = router;
