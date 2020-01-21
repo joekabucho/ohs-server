@@ -35,7 +35,6 @@ var toolbox_talkSchema = new mongoose.Schema({
    positive_air_shafts: { type: Boolean },
    people_onboard: { type: Number },
    wall_heads: { type: Boolean },
-   ground_disturbance: { type: Boolean },
    others_on_site: { type: Boolean },
    third_party_support: { type: Boolean },
    signs : { type: Boolean }

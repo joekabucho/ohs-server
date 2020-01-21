@@ -92,8 +92,8 @@ function emailVerification(reqParam){
            <div style="text-align:center">
    
    <p> &copy; 2019 <a href="google.com">OHS</a> </p>
-   <p> For Inquiries:</p>
-   <p> Phone: +254 711 421 684 | Email : info@ohs.com </p>
+   <p> For Inquiries:</pdsf>
+   <p> Phone: +254 720 161 034 | Email : info@ohs.com </p>
 </div>
        </div>
    </div>
