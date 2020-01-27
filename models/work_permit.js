@@ -14,6 +14,8 @@ var work_permitSchema = new mongoose.Schema({
     technician: { type: String},
     comments: { type: String},
     valid_from: { type: Date},
+    issue_to:{type:String},
+    valid_from: { type: Date},
     valid_to: { type: Date}
      
 

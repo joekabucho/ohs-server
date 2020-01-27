@@ -18,6 +18,7 @@ var jobcardSchema = new mongoose.Schema({
     control_measures: { type: String },
     controlled_risk_levels: { type: String },
     status: { type: String },
+    issue_to:{type:String},
     amount_invoiced: { type: Number },
 
      
