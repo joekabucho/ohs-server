@@ -2,6 +2,7 @@ const userService = require('../services/user.service');
 const mailService = require("../services/mail.service");
 const emailExistence = require('email-existence');
 const User = require('./users.model');
+
 //const nodemailer = require('nodemailer');
 
 
@@ -37,6 +38,7 @@ exports.emailVerify = (req,res, next)=>{
                 email: req.body.email,
                 reset_code: code,  
             });
+            
             user.save(function(err, result) {
         
                     if(err) {
@@ -53,8 +55,54 @@ exports.emailVerify = (req,res, next)=>{
     } 
 });
 
-};
+}
 
+exports.resetPasswordCode = (req, res) =>{
+    const code = (Math.random(7)*1000000).toFixed(0);
+    User.findOne({email: req.body.email}, async function(err, user){
+        if(err){
+            res.status(500).json("An error occured")
+        }
+        if(!user){
+            res.status(404).json("User does not exist")
+        }
+        if(user){
+            
+            user.reset_code = code;
+
+            await user.save();
+             
+
+            mailService.passwordResetCode(user).catch(e=>{
+                console.log("THis error occured: "+e)
+            });
+            res.status(200).json("A reset email has been sent to your email");
+        }
+    })
+}
+
+exports.resetPass =(req, res) =>{
+    User.findOne({email: req.body.email},  function(err, user){
+        if(err){
+            res.status(500).json("An error occured")
+        }
+        if(!user){
+            res.status(404).json("User does not exist")
+        }
+        if(user){
+            if(req.body.reset_code == user.reset_code){
+                
+                user.password = req.body.password;
+                user.reset_code = null
+
+                res.status(200).json("Successful");
+                
+            }else{
+                res.status(500).json("Reset code did not match")
+            }
+          }
+    })
+}
 
   exports.create = (req, res, next) => {
     emailExistence.check(req.body.email, function(err, exists){
@@ -70,13 +118,13 @@ exports.emailVerify = (req,res, next)=>{
              if(err){
                  res.status(500).json("An error occured during registration");
         }
-        if(user.reset_code === req.body.code){
+        if(user.reset_code == req.body.code){
              
             user.role = req.body.role,
             user.department = req.body.department,
             user.name = req.body.name,
             user.password = req.body.password,
-            user.reset_code = null;
+            user.reset_code = null
 
             user.save().then(function(result, err){
                 
@@ -123,4 +171,5 @@ exports.emailVerify = (req,res, next)=>{
     mailService.inviteUser(req.body)
         .then(e =>res.json({}))
         .catch(err => res.sendStatus(401));
-    };
+};
+

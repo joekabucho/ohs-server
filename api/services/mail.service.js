@@ -110,6 +110,54 @@ function emailVerification(reqParam){
     });
 }
 
+function passwordResetCode(reqParam){
+    return new Promise((resolve, reject)=>{
 
+        let options = {
+            host: "smtp.gmail.com",
+            port: 465,
+            auth: {
+                user: 'joekabucho2@gmail.com',
+                pass: 'joeedu@12345' 
+            }
+        }
 
- module.exports = { sendMailToClient, inviteUser, emailVerification }
+        let transporter = nodemailer.createTransport((options));
+    
+        let email = {
+            from: 'joekabucho2@gmail.com', 
+            to: reqParam.email,  
+            subject: "Reset Code",  
+            text: 'Hello',
+            html: `
+            <div style="border: 1px solid #ededed; border-radius: 4px; background-color: #ffffff; padding: 20px;">
+               <div style="background-color: #e0e0e0; text-align:center;">
+                    
+               </div>
+               <h2 style="text-transform: uppercase;"><strong>Use this code to reset your account password! </strong></h2>
+               <hr>
+               <h2> ${reqParam.reset_code}</h2>
+               <hr>
+              <p>Thank you for partnering up with OHS, we are happy to have you aboard with us.</p>
+           </div>
+           <div style="text-align:center">
+   
+            <p> &copy; 2019 <a href="google.com">OHS</a> </p>
+            <p> For Inquiries:</p>
+            <p> Phone: +254 720 161 034 | Email : info@OHS.com </p>
+            </div>
+                </div>
+            </div>
+        <br>
+         `
+        };
+    
+        transporter.sendMail(email, function (err, data) {
+            !err ? resolve() : reject(err);
+         });
+    
+
+    });
+}
+
+ module.exports = { sendMailToClient, inviteUser, emailVerification,passwordResetCode }

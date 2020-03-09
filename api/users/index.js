@@ -7,6 +7,8 @@ router.get('/getAll', controller.getAll);
 router.get('/getOne/:id', controller.getOne);
 router.post('/login', controller.login);
 router.post('/verify', controller.emailVerify);
+router.post('/resetcode', controller.resetPasswordCode);
+router.post("/resetpassword", controller.resetPass);
 router.post('/register', controller.create);
 router.put('/update/:id', controller.update);
 router.delete('/delete/:id', controller.delete);

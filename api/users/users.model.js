@@ -50,10 +50,10 @@ authenticate(password, callback){
         if(err) {
             return callback(err);
         }
-        console.log(result);
+        console.log(result)
         callback(null, result);
     });
 }
-};
+}
 
 module.exports = mongoose.model('User', User);
