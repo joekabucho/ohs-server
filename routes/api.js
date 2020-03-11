@@ -18,6 +18,8 @@ var Induction_checklist = require('../models/induction_checklist');
 var Image_upload = require('../models/image_upload');
 var Toolbox_talk = require('../models/toolbox_talk');
 var Work_permit = require('../models/work_permit');
+var Job_analysis = require('../models/job_analysis');
+var Incident = require('../models/icident');
 
 
 // Routes
@@ -35,6 +37,12 @@ Toolbox_talk.register(router, '/toolbox_talk');
 
 Work_permit.methods(['get', 'put', 'post', 'delete']);
 Work_permit.register(router, '/work_permit');
+
+Job_analysis.methods(['get', 'put', 'post', 'delete']);
+Job_analysis.register(router, '/job_analysis');
+
+Incident.methods(['get', 'put', 'post', 'delete']);
+Incident.register(router, '/incident');
 
 // Return router
 module.exports = router;
