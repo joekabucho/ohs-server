@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const cors = require('cors');
+const Cors = require('cors');
 const bodyParser = require('body-parser');
 const urlencodedParser = bodyParser.urlencoded({limit: '20mb', extended: true});
 const http = require('http');
@@ -21,18 +21,12 @@ app.use(express.urlencoded({extended: false}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+app.use(Cors());
 // Routes
 app.use('/api', require('./routes/api'));
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://localhost:4200/"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
-
-
 //cors
-app.use(cors());
+
 app.use(fileUpload());
 // Bordy parser
 app.use(bodyParser.json({limit: '20mb'}));
