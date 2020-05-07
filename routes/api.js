@@ -12,6 +12,7 @@ var Toolbox_talk = require('../models/toolbox_talk');
 var Work_permit = require('../models/work_permit');
 var Job_analysis = require('../models/job_analysis');
 var Incident = require('../models/icident');
+var Detection = require('../models/detection');
 
 
 // Routes
@@ -35,6 +36,9 @@ Job_analysis.register(router, '/job_analysis');
 
 Incident.methods(['get', 'put', 'post', 'delete']);
 Incident.register(router, '/incident');
+
+Detection.methods(['get', 'put', 'post', 'delete']);
+Detection.register(router, '/detection');
 
 // Return router
 module.exports = router;
